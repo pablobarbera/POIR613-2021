@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Research Project</title>
+
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">POIR 613</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="schedule.html">Syllabus</a>
+</li>
+<li>
+  <a href="research_project.html">Project</a>
+</li>
+<li>
+  <a href="code.html">Code</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Resources
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="conduct.html">Academic Conduct</a>
+    </li>
+    <li>
+      <a href="support.html">Support Systems</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/pablobarbera/POIR613">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Research Project</h1>
+
+</div>
+
+
+<p>Students are required to submit an original research paper that employs any of the methods introduced in the course. The goal of this exercise is to demonstrate that you have the ability to conduct research that applies computational methods to political science questions. This research paper can be an individual or group project (up to 3 people). Your progress on the project will be evaluated throughout the semester, following the schedule below.</p>
+<table class="table table-stripped">
+<thead>
+<th>
+Assignment
+</th>
+<th>
+Due date
+</th>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="research_project.html#idea">Project idea</a>
+</td>
+<td>
+Oct 15 10:00pm (Friday)
+</td>
+</tr>
+<tr>
+<td>
+<a href="research_project.html#descriptive">Descriptive statistics</a>
+</td>
+<td>
+Nov 5 10:00pm (Friday)
+</td>
+</tr>
+<tr>
+<td>
+<a href="research_project.html#draft">First full draft</a>
+</td>
+<td>
+Nov 29 10:00pm (Monday)
+</td>
+</tr>
+<tr>
+<td>
+<a href="research_project.html#presentations">Small-group presentations</a>
+</td>
+<td>
+Dec 1 (Wednesday)
+</td>
+</tr>
+<tr>
+<td>
+<a href="research_project.html#final">Final Paper</a>
+</td>
+<td>
+Dec 15 10:00pm (Wednesday)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="idea" class="section level1">
+<h1>Project idea</h1>
+<p>A one-page summary of your project, with a list of potential references, sent via email to the instructor. This summary should mention: your research question, argument and/or hypothesis, methodology, potential sources of data, and your expected contribution.</p>
+</div>
+<div id="descriptive" class="section level1">
+<h1>Descriptive statistics</h1>
+<p>A five-page detailed summary of the project that builds upon the previous submission and incorporates the feedback received from the instructor. Unlike the previous submission, this summary should include at least descriptive statistics of the dataset employed in the study and/or some exploratory data analysis.</p>
+</div>
+<div id="draft" class="section level1">
+<h1>Full draft</h1>
+<p>The first full draft of the paper should be between 10 and 15 pages long (including figures and tables), incorporate any additional feedback received in the previous rounds, and present a nearly-finished data analysis section where at least some of the hypotheses are tested.</p>
+</div>
+<div id="presentations" class="section level1">
+<h1>Presentations</h1>
+<p>Students will be given the chance to discuss their project with a few of their colleagues during the last session of the semester. Each presentation should be at most 10 minutes long. No slides are required. After the presentation, other students will provide feedback on the project.</p>
+</div>
+<div id="final" class="section level1">
+<h1>Final paper</h1>
+<p>The final paper should be around 8,000 words long (20-25 pages including an abstract, figures, and tables but not the list of references). As described above, it will be evaluated on whether it demonstrates your ability to conduct research that applies computational methods to political science questions. This refers to both the capacity to employ the advanced research methods covered in class, but also the ability to derive falsiable hypotheses, rooted in social science theories, and to apply the appropriate methods to test them (and correctly interpret the results of your analysis). The paper will be submitted via email to the instructor.</p>
+<div id="numbers-tables-and-figures" class="section level2">
+<h2>Numbers, tables, and figures</h2>
+<p>Tables and figures should be included where they fall in the text, and not in an appendix. Tables and figures should be formatted for publication. In particular do not include the direct output of software such as R. They should be clear, readable, and easily understandable. In formatting tables and figures should generally follow the guidelines for “Tables and Figures” in <a href="https://academic.oup.com/pan/pages/Instructions_To_Authors">Political Analysis</a>.</p>
+<p>You are encouraged to use graphics to illustrate your main argument and research findings. If color is used, then it should be used appropriately, following the best practices in data visualization.</p>
+<p>Generally, it is recommended to add footnotes to the tables and figures with additional details on the dependent and independent variables, sources of the data, units included in the analysis, and a one-line explanation of what the reader should learn from that table or figure.</p>
+<p>Numbers used in the manuscript text, figures, and tables should be reported with no more precision than they are measured with or is substantively meaningful. A good rule of thumb is to use no more than 2 digits unless there is good reason to do so. Do not report more significant digits than the standard errors imply. Variables should be scaled to make the reporting of results as straightforward as possible. If variables are on vastly different scales, then they should be rescaled to produce estimates on similar scales. Uncertain numbers should be accompanied by an indication of their uncertainty, generally a standard error or confidence interval.</p>
+<p>The uncertainty of estimates is best conveyed by standard errors or confidence intervals, presented in the context of quantities of substantive interest. Generally, tables should not routinely report t-statistics or p-values for tests of the null hypothesis that each coefficient is zero. Regression tables should report the estimate and standard errors of the coefficients, without stars indicating significance levels. While discouraged, it is acceptable to use asterisks, “stars”, or other symbols to represent varying levels of statistical significance. If an author states that a test is “statistically significant”, it must be at the .05 level or lower.</p>
+</div>
+<div id="footnotes" class="section level2">
+<h2>Footnotes</h2>
+<p>Explanatory footnotes may be included but should not be used for simple citations. Simple citations should be made in-line in author-year format. Do not use end notes. Do not use acronyms or computational abbreviations when discussing variables in the text. All variables that appear in tables or figures should be described in appropriate detail in the text.</p>
+</div>
+<div id="citations-and-references" class="section level2">
+<h2>Citations and References</h2>
+<p>References should be listed in a separate section titled “References.” Citations should be in the author-year format, and references should follow the formats common to political science journals. This is generally the <em>Chicago Manual of Style</em> author-year format. It is best to start getting used to using a <a href="https://en.wikipedia.org/wiki/Reference_management_software">reference manager</a> such as <a href="https://www.zotero.org/">Zotero</a>, <a href="https://www.mendeley.com/">Mendeley</a>, <a href="http://papersapp.com/">Papers</a>, <a href="https://www.colwiz.com/">Colwiz</a>, <a href="http://endnote.com/">Endnote</a>, or BibTeX (with <a href="http://bibdesk.sourceforge.net/">BibDesk</a> or <a href="http://www.jabref.org/">JabRef</a>). These both store references and format citations and references according to specified styles.</p>
+</div>
+<div id="data-citation" class="section level2">
+<h2>Data citation</h2>
+<p>All data used in the paper must be cited. Citations must include enough information for readers to find the original sources, and for those original sources to be consistently identified in the future. Data citations should appear in the the manuscript’s reference list, contain the name or title of the data set, the author(s), version, date of creation, and a persistent data identifier, such as a DOI, if one is available. If a persistent identifier is not available, include a URI if one is available.</p>
+</div>
+<div id="sources-for-these-guidelines" class="section level2">
+<h2>Sources for these guidelines</h2>
+<p>These guidelines were compiled by <a href="http://www.jrnold.me/">Jeffrey Arnold</a>, and are derived from the current manuscript guidelines for top political science journals: <a href="http://www.apsanet.org/APSR-Submission-Guidelines-August-2016">APSR Submission Guidelines</a>, <a href="https://ajps.org/guidelines-for-manuscripts/">AJPS Guidelines for Manuscripts</a>, <a href="https://ajpsblogging.files.wordpress.com/2015/03/ajps-guide-for-replic-materials-1-0.pdf">AJPS Guidelines for Preparing Replication Files</a>, <a href="http://www.journals.uchicago.edu/journals/jop/instruct">Journal of Politics Instructions for Authors</a>, <a href="https://academic.oup.com/pan/pages/Instructions_To_Authors">Political Analysis Information to Authors and Reviewers</a>.</p>
+</div>
+</div>
+
+<footer class="footer" id="copyright">
+  <div class="container">
+      <p class="text-muted">
+          © Jeffrey Arnold, 2016, <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </p>
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

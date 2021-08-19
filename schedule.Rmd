@@ -1,0 +1,402 @@
+---
+title: Course outline and readings
+---
+
+Note: slides will be added as the course progresses.
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-1" class="panel-title">
+<a data-toggle="collapse" href="#collapse1">Week 1: 08/25. Introduction</a>
+</h2>
+</div>
+<div id="collapse1" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Introductions and course overview. What is Computational Social Science? Good computing practices. Introduction to version control and GitHub.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Lazer, D., Pentland, A. S., Adamic, L., Aral, S., Barabasi, A. L., Brewer, D., … & Jebara, T. (2009). [Life in the network: the coming age of computational social science.](http://fowler.ucsd.edu/computational_social_science.pdf) *Science*, 323(5915), 721-3.
+
+- Lazer, D., Hargittai, E., Freelon, D., Gonzalez-Bailon, S., Munger, K., Ognyanova, K., & Radford, J. (2021). [Meaningful measures of human society in the twenty-first century.](https://www.nature.com/articles/s41586-021-03660-7) *Nature*, 1-8.
+
+- Grimmer, J. (2015). [We are all social scientists now: how big data, machine learning, and causal inference work together.](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S1049096514001784) *PS: Political Science & Politics*, 48(1), 80-83.
+
+
+</div>
+</div>
+</div>
+
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-2" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 2: 09/01. Ethics. </a>
+</h2>
+</div>
+<div id="collapse2" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Computational social science: research opportunities and challenges. Ethics of social science research in the digital age. Big data, big bias?
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Barberá, P. & and Steinert-Threlkeld, Z. (2020). [How to Use Social Media Data for Political Science Research.](http://pablobarbera.com/static/social-media-data-generators.pdf) Curini, L., and Franzese, R. (eds) The SAGE Handbook of Research Methods in Political Science and International Relations, London: Sage, 404-423.
+
+- Lazer, D. M., Pentland, A., Watts, D. J., Aral, S., Athey, S., Contractor, N., ... & Wagner, C. (2020). [Computational social science: Obstacles and opportunities.](https://science.sciencemag.org/content/369/6507/1060.summary) *Science*, 369(6507), 1060-1062.
+
+- [Chapter 6](http://www.bitbybitbook.com/en/ethics/) of Salganik, M. (2017). [Bit by Bit: Social Research in the Digital Age](http://www.bitbybitbook.com/). Princeton, NJ: Princeton University Press. Open review edition.
+
+- Persily, N., & Tucker, J. A. (2020). [Conclusion: The Challenges and Opportunities for Social Media Research.](https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/persily_tucker_conclusion.pdf) In *Social Media and Democracy: The State of the Field, Prospects for Reform*, 313-324.
+
+#### Readings for discussion
+
+- Kramer, A. D., Guillory, J. E., & Hancock, J. T. (2014). [Experimental evidence of massive-scale emotional contagion through social networks.](http://www.pnas.org/content/111/24/8788.short) *Proceedings of the National Academy of Sciences*, 111(24), 8788-8790.
+
+- Hargittai, E. (2018). [Potential Biases in Big Data: Omitted Voices on Social Media.](https://journals.sagepub.com/doi/abs/10.1177/0894439318788322) *Social Science Computer Review*, forthcoming.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-3" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 3: 09/08. Online experiments.</a>
+</h2>
+</div>
+<div id="collapse3" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Large-scale online experiments. Data collection: automated data collection from the web.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Guess, A. M. (2021). [Experiments Using Social Media Data.](https://osf.io/gvbyc/) Advances in Experimental Political Science, 184.
+
+#### Readings for discussion
+
+- Bond, R. M., Fariss, C. J., Jones, J. J., Kramer, A. D., Marlow, C., Settle, J. E., & Fowler, J. H. (2012). [A 61-million-person experiment in social influence and political mobilization](https://www.nature.com/nature/journal/v489/n7415/abs/nature11421.html). *Nature*, 489(7415), 295-298.
+
+- King, G., Pan, J., & Roberts, M. E. (2014). [Reverse-engineering censorship in China: Randomized experimentation and participant observation.](http://scholar.harvard.edu/files/gking/files/experiment_0.pdf) *Science*, 345(6199), 1251722.
+
+- Siegel, A. A., & Badaan, V. (2020). [#No2Sectarianism: Experimental approaches to reducing sectarian hate speech online.](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/no2sectarianism-experimental-approaches-to-reducing-sectarian-hate-speech-online/27157485824C8E071CB2DD3E26012EA3) *American Political Science Review*, 114(3), 837-855.
+
+- Asimovic, N., Nagler, J., Bonneau, R., & Tucker, J. A. (2021). [Testing the effects of Facebook usage in an ethnically polarized setting.](https://www.pnas.org/content/pnas/118/25/e2022819118.full.pdf) *Proceedings of the National Academy of Sciences*, 118(25).
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-4" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 4: 09/15. Text (I). </a>
+</h2>
+</div>
+<div id="collapse4" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Introduction to automated text analysis. Sources of textual data. String manipulation in R. Regular expressions. 
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Grimmer, J., & Stewart, B. M. (2013). [Text as data: The promise and pitfalls of automatic content analysis methods for political texts.](https://www.cambridge.org/core/journals/political-analysis/article/div-classtitletext-as-data-the-promise-and-pitfalls-of-automatic-content-analysis-methods-for-political-textsdiv/F7AAC8B2909441603FEB25C156448F20) *Political analysis*, 21(3), 267-297.
+
+- Benoit, K. (2020). [Text as data: an overview.](https://kenbenoit.net/pdfs/28%20Benoit%20Text%20as%20Data%20draft%202.pdf) In Curini, L., and Franzese, R. (eds) *The SAGE Handbook of Research Methods in Political Science and International Relations*, London: Sage.
+
+- Wilkerson, J. and Casas, A. (2017). [Large-Scale Computerized Text Analysis in Political Science: Opportunities and Challenges.](https://www.annualreviews.org/doi/abs/10.1146/annurev-polisci-052615-025542?journalCode=polisci) *Annual Review of Political Science*, 20, 529:544.
+
+#### No readings for discussion this week
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-5" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 5: 09/22. Text (II). </a>
+</h2>
+</div>
+<div id="collapse5" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Text processing with quanteda. Describing and comparing textual data.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Denny, M. J., & Spirling, A. (2018). [Text preprocessing for unsupervised learning: why it matters, when it misleads, and what to do about it.](https://www.cambridge.org/core/journals/political-analysis/article/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E) *Political Analysis*, 26(2): 168-189.
+
+#### Readings for discussion
+
+- Carter, E. B., & Carter, B. L. (2021). [Questioning More: RT, Outward-Facing Propaganda, and the Post-West World Order.](http://www.erinbcarter.org/documents/RT.pdf) *Security Studies*, 30(1), 49-78.
+
+- Liu, A. H. (2021). [Pronoun Usage as a Measure of Power Personalization: A General Theory with Evidence from the Chinese-Speaking World.](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/B8A422F904339BCB902CA318AAE810A3/S0007123421000181a.pdf/div-class-title-pronoun-usage-as-a-measure-of-power-personalization-a-general-theory-with-evidence-from-the-chinese-speaking-world-div.pdf) *British Journal of Political Science*, 1-18.
+
+- Hengel, E. (2020). [Publishing while female.](https://warwick.ac.uk/fac/soc/economics/about/athena-swan/resources/women.pdf.pdf#page=81) Chapter 10. Women in Economics, 80.
+
+
+
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-6" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 6: 09/29. Text (III).</a>
+</h2>
+</div>
+<div id="collapse6" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Dictionary methods.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- González-Bailón, S., & Paltoglou, G. (2015). [Signals of public opinion in online communication: A comparison of methods and data sources.](https://journals.sagepub.com/doi/pdf/10.1177/0002716215569192?casa_token=a0RzWG5Ax84AAAAA:1Bz3VYxGncl41uzHDY8GAiQiXUJN10ExZGtpDuu2n-qxPwI20hn-l-omjrI5SkwB8X8ToB-6K1M_) *The ANNALS of the American Academy of Political and Social Science*, 659(1), 95-107.
+
+- Barberá, P., Boydstun, A. E., Linn, S., McMahon, R., & Nagler, J. (2021). [Automated text classification of news articles: A practical guide.](https://www.cambridge.org/core/journals/political-analysis/article/abs/automated-text-classification-of-news-articles-a-practical-guide/10462DB284B1CD80C0FAE796AD786BC6) *Political Analysis*, 29(1), 19-42.
+
+#### Readings for discussion
+
+- Young, L., & Soroka, S. (2012). [Affective news: The automated coding of sentiment in political texts.](http://www.tandfonline.com/doi/abs/10.1080/10584609.2012.671234) *Political Communication*, 29(2), 205-231.
+
+- Rathje, S., Van Bavel, J. J., & van der Linden, S. (2021). [Out-group animosity drives engagement on social media.](https://www.pnas.org/content/pnas/118/26/e2024292118.full.pdf) *Proceedings of the National Academy of Sciences*, 118(26).
+
+- Tausczik, Y. R., & Pennebaker, J. W. (2010). [The psychological meaning of words: LIWC and computerized text analysis methods.](http://journals.sagepub.com/doi/abs/10.1177/0261927X09351676) *Journal of language and social psychology*, 29(1), 24-54.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-7" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 7: 10/06. Text (IV).</a>
+</h2>
+</div>
+<div id="collapse7" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Supervised machine learning applied to text classification. Crowd-sourcing the creation of training datasets.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Chapters 2, 5, and 6 of James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). [An introduction to statistical learning.](https://web.stanford.edu/~hastie/ISLRv2_website.pdf) New York: Springer.
+
+- Grimmer, J., Roberts, M. E., & Stewart, B. M. (2021). [Machine Learning for Social Science: An Agnostic Approach.](https://www.annualreviews.org/doi/pdf/10.1146/annurev-polisci-053119-015921) *Annual Review of Political Science*, 24, 395-419.
+
+- Benoit, K., Conway, D., Lauderdale, B. E., Laver, M., & Mikhaylov, S. (2016). [Crowd-sourced text analysis: reproducible and agile production of political data.](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/crowd-sourced-text-analysis-reproducible-and-agile-production-of-political-data/EC674A9384A19CFA357BC2B525461AC3) *American Political Science Review*, 110(2), 278-295.
+
+#### Readings for discussion
+
+- Theocharis, Y., Barberá, P., Fazekas, Z., & Popa, S. A. (2020). [The dynamics of political incivility on Twitter.](https://journals.sagepub.com/doi/pdf/10.1177/2158244020919447) *Sage Open*, 10(2), 2158244020919447.
+
+- Mitts, T., Phillips, G., & Walter, B. (2021). [Studying the Impact of ISIS Propaganda Campaigns.](https://www.dropbox.com/s/8uzexq3ot7kh4pp/propaganda.pdf?dl=0) *Journal of Politics*, forthcoming. (Read also [Appendix](https://www.dropbox.com/s/6x3bip56swtoc6z/propaganda_SI.pdf?dl=0).)
+
+- Kim, J. Y. (2021). [Integrating human and machine coding to measure political issues in ethnic newspaper articles.](https://link.springer.com/article/10.1007/s42001-020-00097-2) *Journal of Computational Social Science*, 1-28.
+
+- Peterson, A., & Spirling, A. (2018). [Classification accuracy as a substantive quantity of interest: Measuring polarization in westminster systems.](https://www.cambridge.org/core/journals/political-analysis/article/classification-accuracy-as-a-substantive-quantity-of-interest-measuring-polarization-in-westminster-systems/45746D999CFCD1CB43E362392D7B2FB4) *Political Analysis*, 26(1), 120-128.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-8" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 8: 10/13. Text (V).</a>
+</h2>
+</div>
+<div id="collapse8" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Unsupervised machine learning (topic models).
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Blei, D. M. (2012). [Probabilistic topic models.](http://dl.acm.org/citation.cfm?id=2133826) *Communications of the ACM*, 55(4), 77-84.
+
+- Roberts, M. E., Stewart, B. M., Tingley, D., Lucas, C., Leder‐Luis, J., Gadarian, S. K., … & Rand, D. G. (2014). [Structural Topic Models for Open‐Ended Survey Responses.](http://authors.library.caltech.edu/52278/7/topicmodelsopenendedexperiments.pdf) *American Journal of Political Science*, 58(4), 1064-1082.
+
+- Quinn, K. M., Monroe, B. L., Colaresi, M., Crespin, M. H., & Radev, D. R. (2010). [How to analyze political attention with minimal assumptions and costs.](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-5907.2009.00427.x) *American Journal of Political Science*, 54(1), 209-228.
+
+#### Readings for discussion
+
+- Barberá, P., Casas, A., Nagler, J., Egan, P. J., Bonneau, R., Jost, J. T., & Tucker, J. A. (2019). [Who leads? Who follows? Measuring issue attention and agenda setting by legislators and the mass public using social media data.](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/D855849CE288A241529E9EC2E4FBD3A8/S0003055419000352a.pdf/div-class-title-who-leads-who-follows-measuring-issue-attention-and-agenda-setting-by-legislators-and-the-mass-public-using-social-media-data-div.pdf) *American Political Science Review*, 113(4), 883-901.
+
+- Terman, R. (2017). [Islamophobia and Media Portrayals of Muslim Women: A Computational Text Analysis of US News Coverage.](https://academic.oup.com/isq/article-abstract/61/3/489/4609692) *International Studies Quarterly*, 61(2): 489-502.
+
+- Motolinia, L. (2021). [Electoral Accountability and Particularistic Legislation: Evidence from an Electoral Reform in Mexico.](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/electoral-accountability-and-particularistic-legislation-evidence-from-an-electoral-reform-in-mexico/BCFD6B0C73B041C8C410594BDB232DB1) *American Political Science Review*, 115(1), 97-113.
+
+- de Vries, E., Schoonvelde, M. & Schumacher, G. (2018). [No Longer Lost in Translation: Evidence that Google Translate Works for Comparative Bag-of-Words Text Applications.](https://www.cambridge.org/core/journals/political-analysis/article/no-longer-lost-in-translation-evidence-that-google-translate-works-for-comparative-bagofwords-text-applications/43CB03805973BB8AD567F7AE50E72CA6) *Political Analysis*, 26(4), 417-430.
+
+</div></div></div>
+
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-9" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 9: 10/20. Text (VI).</a>
+</h2>
+</div>
+<div id="collapse9" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Word embeddings.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Rodriguez, P., & Spirling, A. (2021). [Word Embeddings: What works, what doesn't, and how to tell the difference for applied research.](http://arthurspirling.org/documents/embed.pdf) *Journal of Politics*, forthcoming. See also [FAQ](https://github.com/ArthurSpirling/EmbeddingsPaper/blob/master/Project_FAQ/faq.md).
+
+#### Readings for discussion
+
+- Rodman, E. (2020). [A timely intervention: Tracking the changing meanings of political concepts with word vectors.](https://www.cambridge.org/core/journals/political-analysis/article/abs/timely-intervention-tracking-the-changing-meanings-of-political-concepts-with-word-vectors/DDF3B5833A12E673EEE24FBD9798679E) *Political Analysis*, 28(1), 87-111.
+
+- Osnabrügge, M., Hobolt, S. B., & Rodon, T. (2021). [Playing to the Gallery: Emotive Rhetoric in Parliaments.](https://www.cambridge.org/core/journals/american-political-science-review/article/playing-to-the-gallery-emotive-rhetoric-in-parliaments/2A47C797136261391DA27F3A16F64886) *American Political Science Review*, 1-15.
+
+- Béchara, H., Herzog, A., Jankin, S., & John, P. (2021). [Transfer learning for topic labeling: Analysis of the UK House of Commons speeches 1935–2014.](https://journals.sagepub.com/doi/pdf/10.1177/20531680211022206) *Research & Politics*, 8(2), 20531680211022206.
+
+- Yang, E., & Roberts, M. E. (2021). [Censorship of Online Encyclopedias: Implications for NLP Models.](https://dl.acm.org/doi/pdf/10.1145/3442188.3445916) In *Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency* (pp. 537-548).
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-10" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 10: 10/27. Networks (I).</a>
+</h2>
+</div>
+<div id="collapse10" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Basic concepts in social network analysis. Network visualization.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Sinclair, B. (2016). Network Structure and Social Outcomes: Network Analysis for Social Science, in Alvarez, M. (ed.) Computational Social Science. Cambridge: Cambridge University Press. [Full text available through USC libraries]
+
+- Chapters 1, 2, and 3 in Easley, D., & Kleinberg, J. (2010). [Networks, crowds, and markets.](https://www.cs.cornell.edu/home/kleinber/networks-book/) Cambridge University Press.
+
+#### Readings for discussion
+
+- Bisbee, J., & Larson, J. M. (2017). [Testing social science network theories with online network data: An evaluation of external validity.](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/testing-social-science-network-theories-with-online-network-data-an-evaluation-of-external-validity/4BF517F10F38DFB574FED4A3D805B613) *American political science review*, 111(3), 502-521.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-11" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 11: 11/03. Networks (II).</a>
+</h2>
+</div>
+<div id="collapse11" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Social contagion processes: homophily vs influence. Collecting social media data.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- McPherson, M., Smith-Lovin, L., & Cook, J. M. (2001). [Birds of a feather: Homophily in social networks.](http://www.annualreviews.org/doi/abs/10.1146/annurev.soc.27.1.415) *Annual review of sociology*, 27(1), 415-444.
+
+- Shalizi, C.R. and Thomas, A. (2011). [Homophily and Contagion Are Generically Confounded in Observational Social Network Studies.](https://journals.sagepub.com/doi/pdf/10.1177/0049124111404820) *Sociological Methods & Research*, 40(2): 211-239.
+
+#### Readings for discussion
+
+- Christakis, N. A., & Fowler, J. H. (2007). [The spread of obesity in a large social network over 32 years.](http://www.nejm.org/doi/full/10.1056/NEJMsa066082#t=article) *New England Journal of Medicine*, 357, 370-379.
+
+- Aral, S., Muchnik, L., & Sundararajan, A. (2009). [Distinguishing influence-based contagion from homophily-driven diffusion in dynamic networks.](http://www.pnas.org/content/106/51/21544.short) *Proceedings of the National Academy of Sciences*, 106(51), 21544-21549.
+
+- Bakshy, E., Rosenn, I., Marlow, C. and Adamic, L. (2012) [The Role of Social Networks in Information Diffusion.](https://arxiv.org/pdf/1201.4145.pdf) ArXiv Preprint: 1201.4145v2
+
+- Vosoughi, S., Roy, D., & Aral, S. (2018). [The spread of true and false news online.](https://science.sciencemag.org/CONTENT/359/6380/1146.abstract) *Science*, 359(6380), 1146-1151.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-12" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 12: 11/10. Networks (III).</a>
+</h2>
+</div>
+<div id="collapse12" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Dimensionality reduction. Latent space network models.
+
+LINK TO SLIDES (.pdf)
+
+#### Readings for discussion
+
+- Treier, S., & Jackman, S. (2008). [Democracy as a latent variable.](http://onlinelibrary.wiley.com/doi/10.1111/j.1540-5907.2007.00308.x/full) *American Journal of Political Science*, 52(1), 201-217.
+
+- Barberá, P. (2014). [Birds of the same feather tweet together: Bayesian ideal point estimation using Twitter data.](https://www.cambridge.org/core/journals/political-analysis/article/div-classtitlebirds-of-the-same-feather-tweet-together-bayesian-ideal-point-estimation-using-twitter-datadiv/91E37205F69AEA32EF27F12563DC2A0A) *Political Analysis*, 23(1), 76-91.
+
+- González-Bailón et al (2011). [The Dynamics of Protest Recruitment through an Online Network.](https://www.nature.com/articles/srep00197/fig_tab) *Nature Scientific Reports*, 1: 197.
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-13" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 13: 11/17. Big data. </a>
+</h2>
+</div>
+<div id="collapse13" class="panel-collapse collapse in" style="margin:12px">
+
+**Topics:** Parallel programming with R. Introduction to SQL.
+
+LINK TO SLIDES (.pdf)
+
+#### Background reading
+
+- Beaulieu, A. (2009). [Learning SQL: Master SQL Fundamentals.](https://books.google.co.uk/books?hl=en&lr=&id=1PgCCVryjOQC&oi=fnd&pg=PR3&dq=learning+sql+alan&ots=X6M3Iaz1wO&sig=38Fp1kDlxM8TF7miw0K2CNcKib4#v=onepage&q=learning%20sql%20alan&f=false) O’Reilly Media, Inc.
+
+- Stephens, R., Plew, R., & Jones, A. D. (2009). [Sams teach yourself SQL in one hour a day.](https://books.google.co.uk/books?hl=en&lr=&id=9fDZ_rVoxx0C&oi=fnd&pg=PR5&dq=%22Sams+Teach+Yourself+SQL+in+24+Hours%22&ots=UkaClJDMem&sig=wgLy-DG3bc7g0LO0_Ojy5Cy2Ejs#v=onepage&q=%22Sams%20Teach%20Yourself%20SQL%20in%2024%20Hours%22&f=false) Sams Publishing.
+
+- [Google BigQuery: Legacy SQL Functions and Operators.](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-14" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 14: 11/24. No class.</a>
+</h2>
+</div>
+<div id="collapse14" class="panel-collapse collapse in" style="margin:12px">
+
+No class: Thanksgiving Holiday.
+
+
+</div></div></div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-15" class="panel-title">
+<a data-toggle="collapse" href="#collapse2">Week 15: 12/01. Presentations. </a>
+</h2>
+</div>
+<div id="collapse15" class="panel-collapse collapse in" style="margin:12px">
+
+Small-group discussions of research projects. Course recap. Industry careers panel.
+
+</div></div></div>

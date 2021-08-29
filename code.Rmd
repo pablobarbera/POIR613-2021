@@ -33,13 +33,15 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse2" class="panel-collapse collapse in" style="margin:12px">
 
-- Slides: Good coding / programming practices
+- Slides: [Good coding / programming practices (.pdf file)](slides/04-good-coding.pdf)
 
-- Code: Functions and loops in R
+- Code: [Functions and loops in R](code/02-loops-functions.html) ([.Rmd file](code/02-loops-functions.html))
 
-- Code: Efficient programming with R
+- Code: [Brief overview of algorithm complexity](code/03-algorithm-complexity.html) ([.Rmd file](code/03-algorithm-complexity.html))
 
-- GitHub Classroom: Challenge 1
+- Code: [Efficient programming with R](code/04-efficient-programming) ([.Rmd file](code/04-efficient-programming))
+
+- [GitHub Classroom: Challenge 1](https://classroom.github.com/a/kmGctmrA)
 
 
 </div>

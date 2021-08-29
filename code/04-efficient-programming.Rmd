@@ -1,0 +1,163 @@
+---
+title: "Efficient programming with R"
+author: "Pablo Barbera"
+---
+
+### Vectorization of R code
+
+Let's create the following two vectors with random values sampled from a uniform distribution:
+
+```{r}
+set.seed(777)
+n <- 1000000
+x <- runif(n)
+y <- runif(n)
+```
+
+Which of the following chunks of code will run faster?
+
+```{r}
+# manual loop over each pair of values
+loop <- function(){
+  z <- rep(NA, n)
+  for (i in 1:n){
+    z[i] <- x[i] + y[i]
+  }
+  return(z)
+}
+```
+
+```{r}
+# loop using sapply in base R
+sapply_code <- function(){
+  z <- sapply(1:n, function(i) x[i] + y[i])
+  return(z)
+}
+```
+
+```{r}
+# vectorized code with `+`
+vectorized <- function(){
+  z <- x + y
+  return(z)
+}
+```
+
+
+```{r}
+system.time(loop())
+system.time(sapply_code())
+system.time(vectorized())
+```
+
+There are many other cases where vectorized functions can dramatically speed up our code. For example, the `ifelse` function.
+
+```{r}
+set.seed(123)
+n <- 10000000
+ideology <- sample(1:10, n, replace=TRUE)
+
+# vectorized code
+group_ideology <- function(){
+  groups <- ifelse(ideology>5, "right", "left")
+  return(groups)
+}
+
+# non-vectorized code
+ideology_loop <- function(){
+  groups <- rep(NA, n)
+  for (i in 1:n){
+    if (ideology[i]<5) groups[i] <- "left"
+    if (ideology[i]>5) groups[i] <- "right"
+  }
+}
+
+# benchmarks
+system.time(group_ideology())
+system.time(ideology_loop())
+```
+
+The other important way to write more efficient code is to avoid memory copy:
+
+```{r}
+set.seed(123)
+n <- 10000
+# function to generate n random numbers
+func1 <- function(){
+  rnd <- c()
+  for (i in 1:n){
+    rnd <- c(rnd, rnorm(n=1))
+  }
+  return(rnd)
+}
+
+func2 <- function(){
+  rnd <- rep(NA, n)
+  for (i in 1:n){
+    rnd[i] <- rnorm(n=1)
+  }
+  return(rnd)
+}
+
+system.time(func1())
+system.time(func2())
+
+# of course, a WAY more efficient way to run this, with vectorized function...
+func3 <- function(){
+  rnd <- rnorm(n=n)
+  return(rnd)
+}
+
+system.time(func3())
+
+```
+
+Memory copy applies as well to data frames. A very frequent scenario looks something like the following..
+
+```{r}
+set.seed(123)
+n <- 200
+
+## using rbind
+func1 <- function(){
+  df <- data.frame()
+  for (i in 1:n){
+      df <- rbind(df,  data.frame(
+        age = sample(18:100, n, replace=TRUE),
+        state = sample(state.abb, n, replace=TRUE),
+        party = sample(c("R", "D", "I"), n, replace=TRUE)
+      ) )
+  }
+  return(df)
+}
+```
+
+You can avoid it by storing results in a list, and then using `do.call(rbind, LIST)` to convert back to a single data frame
+
+```{r}
+## using lists to avoid memory copy
+func2 <- function(){
+  df.list <- list()
+  for (i in 1:n){
+      df.list[[i]] <- data.frame(
+        age = sample(18:100, n, replace=TRUE),
+        state = sample(state.abb, n, replace=TRUE),
+        party = sample(c("R", "D", "I"), n, replace=TRUE)
+      )
+  }
+  df <- do.call(rbind, df.list)
+  return(df)
+}
+
+system.time(func1())
+system.time(func2())
+```
+
+For complex script, how can you find what is slowing your code down? You can use `Rprof`
+
+```{r}
+Rprof() # start monitoring
+invisible(func1()) # run your code (but don't show it!)
+Rprof(NULL) # stop
+summaryRprof() # see results
+```

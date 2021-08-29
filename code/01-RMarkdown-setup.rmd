@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Welcome to the course!
 
 In this course, we will be using [RStudio](https://www.rstudio.com/) to interact with R, and write our annotated R code using [Markdown](http://rmarkdown.rstudio.com).

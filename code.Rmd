@@ -39,7 +39,7 @@ The following list provides links to the code used in the guided coding sessions
 
 - Code: [Brief overview of algorithm complexity](code/03-algorithm-complexity.html) ([.Rmd file](code/03-algorithm-complexity.html))
 
-- Code: [Efficient programming with R](code/04-efficient-programming) ([.Rmd file](code/04-efficient-programming))
+- Code: [Efficient programming with R](code/04-efficient-programming.html) ([.Rmd file](code/04-efficient-programming.Rmd))
 
 - [GitHub Classroom: Challenge 1](https://classroom.github.com/a/kmGctmrA)
 
@@ -57,11 +57,13 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse3" class="panel-collapse collapse in" style="margin:12px">
 
-- Code: Scraping tables from websites
+- Slides: [Webscraping (.pdf file)](slides/06-scraping.pdf)
 
-- Code: Scraping unstructured data
+- Code: [Scraping tables from websites](code/05-scraping-tables.html) ([.Rmd file](code/05-scraping-tables.Rmd))
 
-- GitHub Classroom: Challenge 2
+- Code: [Scraping unstructured data](code/06-scraping-unstructured-data.html) ([.Rmd file](code/06-scraping-unstructured-data.html))
+
+- [GitHub Classroom: Challenge 2](https://classroom.github.com/a/TsmKeS49)
 
 
 </div>

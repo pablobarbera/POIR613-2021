@@ -73,7 +73,7 @@ Note: slides will be added as the course progresses.
 
 **Topics:** Large-scale online experiments. Data collection: automated data collection from the web.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/05-experiments.pdf)
 
 #### Background reading
 

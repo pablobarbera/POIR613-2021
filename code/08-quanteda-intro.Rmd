@@ -1,0 +1,115 @@
+---
+title: "Preprocessing text with quanteda"
+author: Pablo Barbera
+output: html_document
+---
+
+As we discussed earlier, before we can do any type of automated text analysis,  we will need to go through several "preprocessing" steps before it can be passed to a statistical model. We'll use the `quanteda` package  [quanteda](https://github.com/kbenoit/quanteda) here.
+
+You can install the packages we will use in this script with the code below:
+
+```{r, eval=FALSE}
+install.packages("quanteda")
+install.packages("quanteda.textplots")
+```
+
+## Pre-processing steps
+
+### 1. Corpus objects
+
+The basic unit of work for the `quanteda` package is called a `corpus`, which represents a collection of text documents with some associated metadata. Documents are the subunits of a corpus. You can use `summary` to get some information about your corpus.
+
+```{r}
+library(quanteda)
+tweets <- read.csv("../data/trump-tweets.csv", 
+                      stringsAsFactors = FALSE)
+twcorpus <- corpus(tweets)
+summary(twcorpus, n=10)
+```
+
+### 2. Tokenization
+
+Once we have a corpus, we can convert it to tokens using the `tokens` function.
+
+```{r}
+toks <- tokens(twcorpus)
+toks[[1]]
+```
+
+`tokens` has many useful options (check out `?tokens` for more information). Let's actually use it to stem the text, extract n-grams, remove punctuation, keep Twitter features...
+
+```{r}
+toks <- tokens(twcorpus,
+               what="word",
+               remove_punct = TRUE,
+               remove_url=TRUE,
+               verbose=TRUE)
+toks[[1]]
+```
+
+By default, `tokens` will keep just entire words, but for example we can use `tokens_ngrams` to create ngrams -- all combinations of one, two, three, etc words (e.g. it will consider both "human", "rights", and "human rights" as tokens).
+
+```{r}
+toks_ngrams <- tokens_ngrams(toks, n=1:2)
+toks_ngrams[[1]]
+```
+
+Another text pre-processing technique we can apply to the tokens object is stemming. In quanteda, stemming relies on the `SnowballC` package's implementation of the Porter stemmer:
+
+```{r}
+toks_stems <- tokens_wordstem(toks)
+toks_stems[[1]]
+```
+
+A very useful feature of tokens objects is _keywords in context_, which returns all the appearances of a word (or combination of words) in its immediate context.
+
+```{r}
+kwic(toks, "immigration", window=5)[1:5,]
+kwic(toks, "healthcare", window=5)[1:5,]
+kwic(toks, "clinton", window=5)[1:5,]
+```
+
+### 3. Creating the document-feature matrix
+
+Finally, we can convert a tokens object into a document-feature matrix using the `dfm` function.
+ 
+```{r}
+twdfm <- dfm(toks, verbose=TRUE)
+twdfm
+```
+
+The `dfm` will show the count of times each word appears in each document (tweet):
+
+```{r}
+twdfm[1:5, 1:10]
+```
+
+In a large corpus like this, many features often only appear in one or two documents. In some case it's a good idea to remove those features, to speed up the analysis or because they're not relevant. We can `trim` the dfm:
+
+```{r}
+twdfm <- dfm_trim(twdfm, min_docfreq=3, verbose=TRUE)
+```
+
+It's often also desirable to take a look at a wordcloud of the most frequent features to see if there's anything weird.
+
+```{r}
+library(quanteda.textplots)
+textplot_wordcloud(twdfm, rotation=0, 
+                   min_size=2, max_size=5, 
+                   max_words=50)
+```
+
+What is going on? We probably want to remove words and symbols which are not of interest to our data, such as http here. This class of words which is not relevant are called stopwords. These are words which are common connectors in a given language (e.g. "a", "the", "is"). We can also see the list using `topFeatures`
+
+```{r}
+topfeatures(twdfm, 25)
+```
+
+We can remove the stopwords when we create the `dfm` object:
+
+```{r}
+twdfm <- dfm(toks, remove=c(
+  stopwords("english"), "t.co", "https", "rt", "amp", "http", "t.c", "can", "u"), verbose=TRUE)
+textplot_wordcloud(twdfm, rotation=0, min_size=2, max_size=5, max_words=50)
+```
+

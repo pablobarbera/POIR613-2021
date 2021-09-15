@@ -81,13 +81,15 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse4" class="panel-collapse collapse in" style="margin:12px">
 
-- Slides: APIs (.pdf file)
+- Code: [Introduction to text analysis with R](code/07-intro-text-analysis.html) ([.Rmd file](code/07-intro-text-analysis.Rmd))
 
-- Code: APIs
+- Code: [Text analysis with the quanteda package](code/08-quanteda-intro.html) ([.Rmd file](code/08-quanteda-intro.Rmd))
 
-- Code: Introduction to text analysis with R
+- Slides: [APIs (.pdf file)](slides/08-APIs.pdf)
 
-- GitHub Classroom: Challenge 3
+- Code: [APIs](code/09-apis.html) ([.Rmd file](code/09-apis.Rmd))
+
+- [GitHub Classroom: Challenge 3](https://classroom.github.com/a/H0WaWaPR)
 
 </div>
 </div>
@@ -103,8 +105,6 @@ The following list provides links to the code used in the guided coding sessions
 </h2>
 </div>
 <div id="collapse5" class="panel-collapse collapse in" style="margin:12px">
-
-- Code: Text analysis with the quanteda package
 
 - Code: Describing and comparing documents
 

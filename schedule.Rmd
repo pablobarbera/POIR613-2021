@@ -100,9 +100,9 @@ Note: slides will be added as the course progresses.
 </div>
 <div id="collapse4" class="panel-collapse collapse in" style="margin:12px">
 
-**Topics:** Introduction to automated text analysis. Sources of textual data. String manipulation in R. Regular expressions. 
+**Topics:** Introduction to automated text analysis: key concepts; selecting documents and features. Sources of textual data. String manipulation in R. Regular expressions. 
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/07-text-intro.pdf)
 
 #### Background reading
 

@@ -1,0 +1,161 @@
+---
+title: "Describing and comparing documents"
+output: html_document
+---
+
+```{r}
+library(quanteda)
+library(quanteda.textstats)
+library(quanteda.textplots)
+```
+
+# Lexical diversity
+
+`textstat_lexdiv()` calculates various measures of lexical diversity based on the number of unique types of tokens and the length of a document. It is useful for analyzing speakers' or writers' linguistic skill, or complexity of ideas expressed in documents.
+
+
+```{r}
+# creating DFM for corpus of inaugural speeches
+dfmat_inaug <- dfm(tokens(data_corpus_inaugural), 
+                   verbose=TRUE)
+# removing stopwords
+dfmat_inaug <- dfm_remove(dfmat_inaug, stopwords('english'))
+tstat_lexdiv <- textstat_lexdiv(dfmat_inaug)
+tail(tstat_lexdiv, 5)
+```
+
+
+```{r}
+plot(tstat_lexdiv$TTR, type = 'l', xaxt = 'n', 
+     xlab = NULL, ylab = "TTR")
+grid()
+axis(1, at = seq_len(nrow(tstat_lexdiv)), labels = docvars(dfmat_inaug, 'President'))
+```
+
+# Readability
+
+`textstat_readability()` computes a metric of document complexity based on characteristics of the text such as number of words, sentence length, number of syllables, etc.
+
+```{r}
+stat_read <- textstat_readability(data_corpus_inaugural,
+                     measure = c("Flesch.Kincaid", "FOG"))
+plot(stat_read$Flesch.Kincaid, type = 'l', xaxt = 'n', xlab = NULL, ylab = "Flesch.Kincaid")
+grid()
+axis(1, at = seq_len(nrow(stat_read)), 
+     labels = docvars(dfmat_inaug, 'President'))
+```
+
+# Distance metrics
+
+`textstat_simil()` computes matrices of distances and similarities between documents. It is useful for comparing the feature use across different documents.
+
+Euclidean distance:
+
+```{r}
+docs <- c("this is document one", "this is document two")
+(doc_dfm <- dfm(tokens(docs)))
+textstat_dist(doc_dfm, method="euclidean")
+
+# let's do the math...
+(d1 <- as.numeric(doc_dfm[1,]))
+(d2 <- as.numeric(doc_dfm[2,]))
+
+sqrt(sum((d1 - d2)^2))
+```
+
+Cosine similarity:
+
+```{r}
+textstat_simil(doc_dfm, method="cosine")
+
+# some more math...
+sum(d1 * d2) / ( sqrt(sum(d1^2)) *  sqrt(sum(d2^2)) )
+```
+
+Note that these two metrics measure the opposite thing: Euclidean distance measures how *different* documents are, whereas cosine similarity measures how *similar* documents are. Of course, it's easy to reverse them; generally, we can just say (1 - distance) = similarity.
+
+And here's an example of how we would apply these metrics in practice. Let's say I want to build a recommendation engine for Taylor Swift songs, obtained from [this source](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-09-29).
+
+```{r}
+library(readr)
+ts <- read_csv("../data/taylor_swift_lyrics.csv")
+
+# now we find a song I like
+song <- which(ts$Title=="You Need To Calm Down")
+ts[song,]
+
+# pre-process the data
+corp <- corpus(ts, text_field = "Lyrics")
+docnames(corp) <- docvars(corp)$Title
+toks <- tokens(corp, remove_punct=TRUE, remove_numbers=TRUE)
+tdfm <- dfm(toks, verbose=TRUE, remove=stopwords("english"))
+
+# and I will compute cosine similarity with respect to all other movies
+simil <- textstat_simil(x=tdfm, 
+                        y=tdfm[song,], method="cosine")
+simil <- simil[order(simil, decreasing=TRUE),]
+head(simil, n=5)
+
+# and we can read their lyrics
+message(ts$Lyrics[ts$Title == names(simil)[2]])
+
+```
+
+## Identifying most unique features of documents
+
+_Keyness_ is a measure of to what extent some features are specific to a (group of) document in comparison to the rest of the corpus, taking into account that some features may be too rare.
+
+```{r}
+# Donald Trump
+head(textstat_keyness(dfmat_inaug, target="2017-Trump",
+                      measure="chi2"), n=20)
+textplot_keyness(textstat_keyness(dfmat_inaug, target="2017-Trump",
+                      measure="chi2"))
+
+# Joe Biden
+head(textstat_keyness(dfmat_inaug, target="2021-Biden",
+                      measure="chi2"), n=20)
+textplot_keyness(textstat_keyness(dfmat_inaug, target="2021-Biden",
+                      measure="chi2"))
+```
+
+Another example using song lyrics:
+
+```{r}
+head(textstat_keyness(tdfm,
+                      target=docvars(tdfm, "Album")=="reputation"), n=20)
+head(textstat_keyness(tdfm,
+                      target=docvars(tdfm, "Album")=="folklore"), n=20)
+```
+
+
+# Clustering methods
+
+Let's explore an application of k-means clustering to the same lyrics dataset:
+
+```{r}
+cdfm <- dfm_weight(dfm_trim(tdfm, min_docfreq = 5, verbose=TRUE), "prop")
+
+set.seed(777) # set random seed to ensure replicability
+kc <- kmeans(cdfm, centers=5)
+table(kc$cluster)
+head(docvars(tdfm, "Title")[kc$cluster==1])
+head(docvars(tdfm, "Title")[kc$cluster==2])
+head(docvars(tdfm, "Title")[kc$cluster==3])
+head(docvars(tdfm, "Title")[kc$cluster==4])
+head(docvars(tdfm, "Title")[kc$cluster==5])
+
+# Taylor is upset?
+head(textstat_keyness(cdfm, target=kc$cluster==1),n=10)
+# Songs about staying?
+head(textstat_keyness(cdfm, target=kc$cluster==2),n=10)
+# You're to blame songs?
+head(textstat_keyness(cdfm, target=kc$cluster==3),n=10)
+# Rest of songs
+head(textstat_keyness(cdfm, target=kc$cluster==4),n=10)
+# Fun nights?
+head(textstat_keyness(cdfm, target=kc$cluster==5),n=10)
+```
+
+
+

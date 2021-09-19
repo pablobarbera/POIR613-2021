@@ -60,6 +60,10 @@ This is useful when working with date strings as well:
 dates <- c("2015/01/01", "2014/12/01")
 substr(dates, 1, 4) # years
 substr(dates, 6, 7) # months
+
+paste(substr(dates, 1, 4), 
+      substr(dates, 6, 7), sep="-")
+
 ```
 
 Let's dig into the data a little bit more. Given the source of the dataset, we can expect that there will be many tweets mentioning "Trump". We can use the `grep` command to identify these. `grep` returns the index where the word occurs.
@@ -91,7 +95,7 @@ length(grep('Trump', tweets$text))
 length(grep('Trump', tweets$text, ignore.case = TRUE))
 ```
 
-Now let's try to identify what tweets are related to immigration and try to store them into a smaller data frame. How would we do it?
+Now let's try to identify what tweets mention the substring "Trump" and try to store them into a smaller data frame. How would we do it?
 
 ```{r}
 self_tweets <- tweets[grep('Trump', tweets$text, ignore.case=TRUE),]
@@ -113,7 +117,10 @@ We can also use question marks to indicate optional characters.
 
 ```{r}
 nrow(tweets)
-length(grep('immigr?', tweets$text, ignore.case=TRUE))
+length(grep('immigrants?', tweets$text, ignore.case=TRUE))
+# equivalent to:
+length(grep('immigrant', tweets$text, ignore.case=TRUE))
+length(grep('immigrant|immigrants', tweets$text, ignore.case=TRUE))
 ```
 
 This will match immigration, immigrant, immigrants, etc.

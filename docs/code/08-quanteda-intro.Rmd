@@ -33,10 +33,10 @@ Once we have a corpus, we can convert it to tokens using the `tokens` function.
 
 ```{r}
 toks <- tokens(twcorpus)
-toks[[1]]
+toks[[2]]
 ```
 
-`tokens` has many useful options (check out `?tokens` for more information). Let's actually use it to stem the text, extract n-grams, remove punctuation, keep Twitter features...
+`tokens` has many useful options (check out `?tokens` for more information). Let's actually use it to remove punctuation, keep Twitter features...
 
 ```{r}
 toks <- tokens(twcorpus,

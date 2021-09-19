@@ -438,6 +438,9 @@ substr(dates, 1, 4) # years</code></pre>
 <pre><code>## [1] &quot;2015&quot; &quot;2014&quot;</code></pre>
 <pre class="r"><code>substr(dates, 6, 7) # months</code></pre>
 <pre><code>## [1] &quot;01&quot; &quot;12&quot;</code></pre>
+<pre class="r"><code>paste(substr(dates, 1, 4), 
+      substr(dates, 6, 7), sep=&quot;-&quot;)</code></pre>
+<pre><code>## [1] &quot;2015-01&quot; &quot;2014-12&quot;</code></pre>
 <p>Let’s dig into the data a little bit more. Given the source of the dataset, we can expect that there will be many tweets mentioning “Trump”. We can use the <code>grep</code> command to identify these. <code>grep</code> returns the index where the word occurs.</p>
 <pre class="r"><code>grep(&#39;Trump&#39;, tweets$text[1:10])</code></pre>
 <pre><code>## [1]  1  2  3  5  6  7  8 10</code></pre>
@@ -458,7 +461,7 @@ substr(dates, 1, 4) # years</code></pre>
 <pre><code>## [1] 17824</code></pre>
 <pre class="r"><code>length(grep(&#39;Trump&#39;, tweets$text, ignore.case = TRUE))</code></pre>
 <pre><code>## [1] 18356</code></pre>
-<p>Now let’s try to identify what tweets are related to immigration and try to store them into a smaller data frame. How would we do it?</p>
+<p>Now let’s try to identify what tweets mention the substring “Trump” and try to store them into a smaller data frame. How would we do it?</p>
 <pre class="r"><code>self_tweets &lt;- tweets[grep(&#39;Trump&#39;, tweets$text, ignore.case=TRUE),]</code></pre>
 </div>
 <div id="regular-expressions" class="section level3">
@@ -472,8 +475,13 @@ substr(dates, 1, 4) # years</code></pre>
 <p>We can also use question marks to indicate optional characters.</p>
 <pre class="r"><code>nrow(tweets)</code></pre>
 <pre><code>## [1] 56571</code></pre>
-<pre class="r"><code>length(grep(&#39;immigr?&#39;, tweets$text, ignore.case=TRUE))</code></pre>
-<pre><code>## [1] 438</code></pre>
+<pre class="r"><code>length(grep(&#39;immigrants?&#39;, tweets$text, ignore.case=TRUE))</code></pre>
+<pre><code>## [1] 107</code></pre>
+<pre class="r"><code># equivalent to:
+length(grep(&#39;immigrant&#39;, tweets$text, ignore.case=TRUE))</code></pre>
+<pre><code>## [1] 107</code></pre>
+<pre class="r"><code>length(grep(&#39;immigrant|immigrants&#39;, tweets$text, ignore.case=TRUE))</code></pre>
+<pre><code>## [1] 107</code></pre>
 <p>This will match immigration, immigrant, immigrants, etc.</p>
 <p>Other common expression patterns are:</p>
 <ul>

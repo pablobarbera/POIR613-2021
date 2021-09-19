@@ -106,9 +106,9 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse5" class="panel-collapse collapse in" style="margin:12px">
 
-- Code: Describing and comparing documents
+- Code: [Describing and comparing documents](code/10-descriptive-statistics.html) ([.Rmd file](code/10-descriptive-statistics.Rmd))
 
-- GitHub Classroom: Challenge 4
+- [GitHub Classroom: Challenge 4](https://classroom.github.com/a/0T4ma7fw)
 
 
 </div>

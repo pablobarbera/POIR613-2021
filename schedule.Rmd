@@ -100,7 +100,7 @@ Note: slides will be added as the course progresses.
 </div>
 <div id="collapse4" class="panel-collapse collapse in" style="margin:12px">
 
-**Topics:** Introduction to automated text analysis: key concepts; selecting documents and features. Sources of textual data. String manipulation in R. Regular expressions. 
+**Topics:** Introduction to automated text analysis: key concepts; selecting documents and features. Sources of textual data. String manipulation in R. Regular expressions. Text processing with quanteda. 
 
 [LINK TO SLIDES (.pdf)](slides/07-text-intro.pdf)
 
@@ -125,9 +125,9 @@ Note: slides will be added as the course progresses.
 </div>
 <div id="collapse5" class="panel-collapse collapse in" style="margin:12px">
 
-**Topics:** Text processing with quanteda. Describing and comparing textual data.
+**Topics:** Describing and comparing textual data.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/09-text-descriptives.pdf)
 
 #### Background reading
 
@@ -157,7 +157,7 @@ LINK TO SLIDES (.pdf)
 
 **Topics:** Dictionary methods.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/10-dictionaries.pdf)
 
 #### Background reading
 
@@ -186,7 +186,7 @@ LINK TO SLIDES (.pdf)
 
 **Topics:** Supervised machine learning applied to text classification. Crowd-sourcing the creation of training datasets.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/11-machine-learning.pdf)
 
 #### Background reading
 
@@ -219,7 +219,7 @@ LINK TO SLIDES (.pdf)
 
 **Topics:** Unsupervised machine learning (topic models).
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/12-topic-models.pdf)
 
 #### Background reading
 

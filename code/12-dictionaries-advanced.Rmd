@@ -1,0 +1,110 @@
+---
+title: "Dictionary methods - advanced topics"
+author: Pablo Barbera
+output: html_document
+---
+
+```{r}
+library(quanteda)
+```
+
+## Creating your own dictionary
+
+Dictionaries are named lists, consisting of a "key" and a set of entries defining the equivalence class for the given key.  To create a simple dictionary of parts of speech, for instance, we could define a dictionary consisting of articles and conjunctions, using the `dictionary()` constructor
+
+```{r}
+posDict <- dictionary(list(articles = c("the", "a", "an"),
+                           conjunctions = c("and", "but", "or", "nor", "for", "yet", "so")))
+```
+
+Let's create a DFM with the `data_corpus_inaugural` corpus (which comes with quanteda) and apply the dictionary.
+
+```{r}
+posDfm <- dfm_lookup(
+  dfm(tokens(data_corpus_inaugural))
+    , dictionary = posDict)
+head(posDfm)
+```
+
+If we plot the values of articles and conjunction over the time (across the speeches) we see that there is a lot of variation. The reason for that is that the raw number of articles and conjunctions will be a function of document length.
+
+```{r}
+plot(x = docvars(data_corpus_inaugural, "Year"), 
+     y = posDfm[, "articles"],
+     type = "p", pch = 16, col = "orange",
+     ylim = range(posDfm),
+     xlab = "Year", ylab = "Term frequency")
+points(x = docvars(data_corpus_inaugural, "Year"), 
+     y = posDfm[, "conjunctions"],
+     pch = 3, col = "blue", new = FALSE)
+```
+
+If we replicate the graph, but this time using weights in the `posDfm` that take into account the differences in the length of each speech, we still find a similar pattern: usage of articles vs conjunctions is not stable over time. 
+
+During the 19th century the usage is more or less stable but then the relative importance of conjunctions compared to articles increases more and more. Since the 1990s both types of function words seem to be used about equally. This probably has to do with the fact that recent speeches have been shown on TV, with more frequent pauses for applause, which means presidents probably prefer to speak in shorter, simpler sentences.
+
+```{r}
+posDfmWeight <- dfm_weight(posDfm, scheme = "prop")
+head(posDfmWeight)
+
+# base R plot
+plot(x = docvars(data_corpus_inaugural, "Year"), 
+     y = posDfmWeight[, "articles"],
+     type = "p", pch = 16, col = "orange",
+     ylim = range(posDfmWeight),
+     xlab = "Year", ylab = "Relative term frequency")
+points(x = docvars(data_corpus_inaugural, "Year"), 
+     y = posDfmWeight[, "conjunctions"],
+     pch = 3, col = "blue", new = FALSE)
+
+# Plot with easier to see trends
+library(ggplot2)
+library(reshape2)
+pdw <- convert(posDfmWeight, to="data.frame")
+pdw$year <- as.numeric(substr(docnames(posDfmWeight), 1, 4))
+pdw <- melt(pdw, id.vars = c("year", "doc_id"))
+ggplot(pdw, aes(x = year, y = value, colour = variable)) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  labs(x = "Year", y = "Relative term frequency")
+```
+
+## Hierarchical dictionaries.
+
+Dictionaries may also be hierarchical, where a top-level key can consist of subordinate keys, each a list of its own.  For instance, `list(articles = list(definite="the", indefinite=c("a", "an"))` defines a valid list for articles.  
+
+Let's explore this idea by creating a dictionary of articles and conjunctions with two levels, one for definite and indefinite articles, and one for coordinating and  subordinating conjunctions.
+
+```{r}
+posDictHier <- list(
+  article = list(definite = "the", indefinite = c("a", "an")),
+  conjunction = list(
+    coordinating = c("and", "but", "or", "nor", "for", "yet", "so"),
+    subordinating = c("although", "because", "since", "unless")
+  )
+)
+```
+
+Now let's apply this to the `data_corpus_inaugural` object, and examine the resulting features. 
+
+```{r}
+posDfmHier <- dfm_lookup(
+  dfm(tokens(data_corpus_inaugural)), 
+      dictionary = dictionary(posDictHier))
+head(posDfmHier)
+```
+
+What happened to the hierarchies, to make them into "features"? The different levels are joined by a dot (".").
+
+Do the subcategories sum to the two general categories? Let's double check...
+
+```{r}
+posDfmHierAlt <- dfm_lookup(posDfmHier, dictionary = dictionary(list(
+  article = c("article.definite", "article.indefinite"), 
+  conjunction = c("conjunction.coordinating", "conjunction.subordinating")
+)))
+head(posDfmHierAlt)
+head(posDfm)
+```
+
+Note that for the article category they do but not for the conjunctions. This is to be expected as in the first version (`posDfm`) only coordinating conjunctions were included whereas the hierarchical categories also contains subordinating conjunctions.

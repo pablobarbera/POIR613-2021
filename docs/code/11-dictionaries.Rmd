@@ -1,0 +1,160 @@
+---
+title: "Dictionary methods"
+author: Pablo Barbera
+output: html_document
+---
+
+## Sentiment detection using dictionary methods
+
+One of the most common applications of dictionary methods is sentiment analysis: using a dictionary of positive and negative words, we compute a sentiment score for each individual document.
+
+Let's apply this technique to tweets by the four leading candidates in the 2016 Presidential primaries. Which candidate was using positive rhetoric most frequently? Which candidate was most negative in their public messages on Twitter?
+
+```{r}
+library(quanteda)
+tweets <- read.csv('../data/candidate-tweets.csv', stringsAsFactors=F)
+```
+
+We will use the positive and negative categories in the augmented General Inquirer dictionary to measure the extent to which these candidates adopted a positive or negative tone during the election campaign.
+
+Note that first you will need to install the `quanteda.dictionaries` and `quanteda.sentiment` packages from GitHub
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("kbenoit/quanteda.dictionaries")
+install_github("quanteda/quanteda.sentiment")
+```
+
+First, we load the dictionary object. Note that we can apply the dictionary object directly (as we will see later), but for now let's learn how to do this if we had a list of positive and negative words on a different file.
+
+```{r}
+library(quanteda.dictionaries)
+library(quanteda.sentiment)
+data(data_dictionary_geninqposneg)
+
+pos.words <- data_dictionary_geninqposneg[['positive']]
+neg.words <- data_dictionary_geninqposneg[['negative']]
+# a look at a random sample of positive and negative words
+sample(pos.words, 10)
+sample(neg.words, 10)
+```
+
+As earlier in the course, we will convert our text to a corpus object, tokenize the documents, and then create the DFM.
+
+```{r}
+twcorpus <- corpus(tweets)
+toks <- tokens(twcorpus)
+tdfm <- dfm(toks)
+```
+
+Now we're ready to run the sentiment analysis! First we will construct a dictionary object.
+
+```{r}
+mydict <- dictionary(list(positive = pos.words,
+                          negative = neg.words))
+```
+
+And now we apply it to the corpus in order to count the number of words that appear in each category
+
+```{r}
+sent <- dfm_lookup(tdfm, dictionary = mydict)
+```
+
+We can then extract the score and add it to the data frame as a new variable
+
+```{r}
+tweets$score <- as.numeric(sent[,1]) - as.numeric(sent[,2])
+```
+
+And now start answering some descriptive questions...
+
+```{r}
+# what is the average sentiment score?
+mean(tweets$score)
+# what is the most positive and most negative tweet?
+tweets[which.max(tweets$score),]
+tweets[which.min(tweets$score),]
+# what is the proportion of positive, neutral, and negative tweets?
+tweets$sentiment <- "neutral"
+tweets$sentiment[tweets$score<0] <- "negative"
+tweets$sentiment[tweets$score>0] <- "positive"
+table(tweets$sentiment)
+```
+
+We can also compute it at the candidate level by taking the average of the sentiment scores:
+
+```{r}
+# loop over candidates
+candidates <- c("realDonaldTrump", "HillaryClinton", "tedcruz", "BernieSanders")
+
+for (cand in candidates){
+  message(cand, " -- average sentiment: ",
+      round(mean(tweets$score[tweets$screen_name==cand]), 4)
+    )
+}
+```
+
+But what happens if we now run the analysis excluding a single word?
+
+```{r}
+pos.words <- pos.words[-which(pos.words=="great")]
+
+mydict <- dictionary(list(positive = pos.words,
+                          negative = neg.words))
+sent <- dfm_lookup(tdfm, dictionary = mydict)
+tweets$score <- as.numeric(sent[,1]) - as.numeric(sent[,2])
+
+for (cand in candidates){
+  message(cand, " -- average sentiment: ",
+      round(mean(tweets$score[tweets$screen_name==cand]), 4)
+    )
+}
+
+```
+
+How would we normalize by text length? (Maybe not necessary here given that tweets have roughly the same length.)
+
+```{r}
+# collapse by account into 4 documents
+grouped_dfm <- dfm_group(tdfm, groups = docvars(tdfm, "screen_name"))
+grouped_dfm
+
+# turn word counts into proportions
+grouped_dfm[1:4, 1:10]
+grouped_dfm <- dfm_weight(grouped_dfm, scheme="prop")
+grouped_dfm[1:4, 1:10]
+
+# Apply dictionary using `dfm_lookup()` function:
+sent <- dfm_lookup(grouped_dfm, dictionary = mydict)
+sent
+(sent[,1]-sent[,2])*100
+
+```
+
+Finally, let's apply a different dictionary so that we can practice with dictionaries in different formats:
+
+```{r}
+data(data_dictionary_MFD)
+# dictionary keys
+names(data_dictionary_MFD)
+# looking at words within first key
+data_dictionary_MFD$care.virtue[1:10]
+
+# applying dictionary
+# 1) collapse by account
+grouped_dfm <- dfm_group(tdfm, groups = docvars(tdfm, "screen_name"))
+# 2) turn words into proportions
+twdfm <- dfm_weight(grouped_dfm, scheme="prop")
+# 3) apply dictionary
+moral <- dfm_lookup(twdfm, dictionary = data_dictionary_MFD)
+
+# are liberals more sensitive to care and virtue?
+moral[,'care.virtue']*100
+moral[,'fairness.virtue']*100
+
+# are conservatives more sensitive to sanctity and authority?
+moral[,'sanctity.virtue']*100
+moral[,'authority.virtue']*100
+
+```
+

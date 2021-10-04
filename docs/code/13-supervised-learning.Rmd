@@ -1,0 +1,141 @@
+---
+title: "Supervised machine learning"
+author: Pablo Barbera
+output: html_document
+---
+
+### Regularized regression
+
+To learn how to build a supervised machine learning model, we will use a classic computer sience dataset of movie reviews, [(Pang and Lee 2004)](http://www.cs.cornell.edu/home/llee/papers/cutsent.pdf).
+The movies corpus has an attribute `Sentiment` that labels each text as either `pos` or `neg` according to the original imdb.com archived newspaper review star rating.
+
+Let's start by reading the dataset and creating a dummy variable indicating whether each review is positive or negative.
+
+```{r}
+library(quanteda)
+movies <- read.csv("../data/movie-reviews.csv", stringsAsFactors = FALSE)
+movies$pos <- ifelse(movies$sentiment=="pos", 1, 0)
+```
+
+As we have discussed multiple times in the course, before we can do any type of automated text analysis, we will need to go through several "preprocessing" steps before it can be passed to a statistical model. 
+
+```{r}
+corp <- corpus(movies)
+summary(corp, n=10)
+toks <- tokens(corp)
+head(toks)
+```
+
+We can then convert a corpus into a document-feature matrix using the dfm function. We will then trim it in order to keep only tokens that appear in 2 or more tweets.
+
+```{r}
+mdfm <- dfm(toks, verbose=TRUE)
+mdfm <- dfm_remove(mdfm, stopwords("english"))
+mdfm <- dfm_trim(mdfm, min_docfreq = 2, verbose=TRUE)
+```
+
+Once we have the DFM, we split it into training and test set. We'll go with 80% training and 20% set. Note the use of a random seed to make sure our results are replicable.
+
+```{r}
+set.seed(123)
+# 80% random sample of rows
+training <-  sample(1:nrow(movies), floor(.80 * nrow(movies)))
+# the remaining 20% will be test
+test <- (1:nrow(movies))[1:nrow(movies) %in% training == FALSE]
+```
+
+Our first step is to train the classifier using cross-validation. There are many packages in R to run machine learning models. For regularized regression, glmnet is in my opinion the best. It's much faster than caret or mlr (in my experience at least), and it has cross-validation already built-in, so we don't need to code it from scratch. We'll start with a lasso regression:
+
+```{r}
+library(glmnet)
+require(doMC)
+registerDoMC(cores=3)
+lasso <- cv.glmnet(mdfm[training,], movies$pos[training], 
+	family="binomial", alpha=1, nfolds=5, parallel=TRUE, intercept=TRUE,
+	type.measure="class")
+plot(lasso)
+```
+
+We can now compute the performance metrics on the test set.
+```{r}
+## function to compute performance metrics
+performance <- function(ypred, y){
+	tab <- table(ypred, y)
+	accuracy <- (tab[1,1]+tab[2,2])/sum(tab)
+	precision <- (tab[2,2])/(tab[2,1]+tab[2,2])
+	recall <- tab[2,2]/(tab[1,2]+tab[2,2])
+	message("Accuracy = ", round(accuracy, 2), "\n",
+	        "Precision = ", round(precision, 2), "\n",
+	        "Recall = ", round(recall, 2))
+}
+# computing predicted values
+preds <- predict(lasso, mdfm[test,], type="class")
+# confusion matrix
+table(preds, movies$pos[test])
+# performance metrics for positive category
+performance(preds, movies$pos[test])
+# performance metrics for negative category
+performance(preds==0, movies$pos[test]==0)
+```
+
+Something that is often very useful is to look at the actual estimated coefficients and see which of these have the highest or lowest values:
+
+```{r}
+# from the different values of lambda, let's pick the highest one that is
+# within one standard error of the best one (why? see "one-standard-error"
+# rule -- maximizes parsimony)
+best.lambda <- which(lasso$lambda==lasso$lambda.1se)
+beta <- lasso$glmnet.fit$beta[,best.lambda]
+head(beta)
+
+## identifying predictive features
+df <- data.frame(coef = as.numeric(beta),
+				word = names(beta), stringsAsFactors=F)
+
+df <- df[order(df$coef),]
+head(df[,c("coef", "word")], n=30)
+
+df <- df[order(df$coef, decreasing=TRUE),]
+head(df[,c("coef", "word")], n=30)
+```
+
+We can easily modify our code to experiment with Ridge or ElasticNet models:
+
+```{r}
+ridge <- cv.glmnet(mdfm[training,], movies$pos[training], 
+	family="binomial", alpha=0, nfolds=5, parallel=TRUE, intercept=TRUE,
+	type.measure="class")
+
+```
+
+```{r}
+# computing predicted values
+preds <- predict(ridge, mdfm[test,], type="class")
+# confusion matrix
+table(preds, movies$pos[test])
+# performance metrics (slightly worse)
+performance(preds, movies$pos[test])
+performance(preds==0, movies$pos[test]==0)
+
+```
+
+```{r}
+best.lambda <- which(ridge$lambda==ridge$lambda.1se)
+beta <- ridge$glmnet.fit$beta[,best.lambda]
+head(beta)
+
+## identifying predictive features - note that here
+## none of the coefficients is zero
+df <- data.frame(coef = as.numeric(beta),
+				word = names(beta), stringsAsFactors=F)
+
+df <- df[order(df$coef),]
+head(df[,c("coef", "word")], n=30)
+
+df <- df[order(df$coef, decreasing=TRUE),]
+head(df[,c("coef", "word")], n=30)
+```
+
+
+
+

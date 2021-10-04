@@ -145,9 +145,9 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse1" class="panel-collapse collapse in" style="margin:12px">
 
-- Code: Supervised learning applied to text classification
+- Code: [Supervised learning applied to text classification](code/13-supervised-learning.html) ([.Rmd file](code/13-supervised-learning.Rmd))
 
-- GitHub Classroom: Challenge 6
+- [GitHub Classroom: Challenge 6](https://classroom.github.com/a/T1VgEAsy)
 
 </div>
 </div>

@@ -162,11 +162,9 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse8" class="panel-collapse collapse in" style="margin:12px">
 
-- Code: Topic models
+- Code: [Topic models](code/14-topic-models.html) ([.Rmd file](code/14-topic-models.Rmd))
 
-- Code: Parsing text in PDF files
-
-- GitHub Classroom: Challenge 7
+- [GitHub Classroom: Challenge 7](https://classroom.github.com/a/1bkUgUzy)
 
 </div>
 </div>
@@ -277,6 +275,8 @@ The following list provides links to the code used in the guided coding sessions
 - Code: Basics of SQL queries
 
 - Code: Querying multiple tables. Grouping and aggregating operations.
+
+- Code: Parsing text in PDF files
 
 - GitHub Classroom: Challenge 12
 

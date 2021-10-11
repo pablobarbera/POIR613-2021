@@ -6,7 +6,7 @@ output: html_document
 
 ### Regularized regression
 
-To learn how to build a supervised machine learning model, we will use a classic computer sience dataset of movie reviews, [(Pang and Lee 2004)](http://www.cs.cornell.edu/home/llee/papers/cutsent.pdf).
+To learn how to build a supervised machine learning model, we will use a classic computer science dataset of movie reviews, [(Pang and Lee 2004)](http://www.cs.cornell.edu/home/llee/papers/cutsent.pdf).
 The movies corpus has an attribute `Sentiment` that labels each text as either `pos` or `neg` according to the original imdb.com archived newspaper review star rating.
 
 Let's start by reading the dataset and creating a dummy variable indicating whether each review is positive or negative.
@@ -26,7 +26,7 @@ toks <- tokens(corp)
 head(toks)
 ```
 
-We can then convert a corpus into a document-feature matrix using the dfm function. We will then trim it in order to keep only tokens that appear in 2 or more tweets.
+We can then convert a corpus into a document-feature matrix using the dfm function. We will then trim it in order to keep only tokens that appear in 2 or more reviews
 
 ```{r}
 mdfm <- dfm(toks, verbose=TRUE)

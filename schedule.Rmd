@@ -253,7 +253,7 @@ Note: slides will be added as the course progresses.
 
 **Topics:** Word embeddings.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/13-word-embeddings.pdf)
 
 #### Background reading
 

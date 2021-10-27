@@ -282,7 +282,7 @@ Note: slides will be added as the course progresses.
 
 **Topics:** Basic concepts in social network analysis. Network visualization.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/14-networks-intro.pdf)
 
 #### Background reading
 

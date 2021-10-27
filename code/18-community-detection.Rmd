@@ -1,0 +1,240 @@
+---
+title: "Community detection"
+author: Pablo Barbera
+---
+
+#### Importing network data into R
+
+In this training session we will be using a small dataset to illustrate how to identify latent communities in networks. The dataset corresponds to the Twitter ego network of POIR -- each node is another Twitter account that the USC POIR account follows, and the edges indicate whether each of those accounts in turn follow each other. (See at the end of this script for the code on how I put together this network.) Edges are thus directed.
+
+The first step is to read the list of edges and nodes in this network:
+
+```{r}
+edges <- read.csv("../data/poir-edges.csv", stringsAsFactors=FALSE)
+head(edges)
+nodes <- read.csv("../data/poir-nodes.csv", stringsAsFactors=FALSE)
+head(nodes)
+```
+
+Now, how do we create the igraph object? We can use the `graph_from_data_frame` function, which takes two arguments: `d`, the data frame with the edge list in the first two columns; and `vertices`, a data frame with node data with the node label in the first column. (Note that igraph calls the nodes `vertices`, but it's exactly the same thing.)
+
+```{r, message=FALSE}
+library(igraph)
+g <- graph_from_data_frame(d=edges, vertices=nodes, directed=FALSE)
+g
+```
+
+What does it mean?
+- `U` means undirected  
+- `N` means named graph  
+- `221` is the number of nodes  
+- `2067` is the number of edges  
+- `name (v/c)` means _name_ is a node attribute and it's a character  
+
+#### Network communities
+
+Networks often have different clusters or communities of nodes that are more densely connected to each other than to the rest of the network. Let's cover some of the different existing methods to identify these communities.
+
+The most straightforward way to partition a network is into __connected components__. Each component is a group of nodes that are connected to each other, but _not_ to the rest of the nodes. For example, this network has 108 components, with the largest one (often called giant component - see more below) containing 114 nodes.
+
+```{r}
+comp <- components(g)
+comp$no # number of components
+max(comp$csize) # size of largest component
+```
+
+Most networks have a single __giant connected component__ that includes most nodes. Most studies of networks actually focus on the giant component, which is what we will do here. One important reason is due to feasibility: e.g. the shortest path between nodes in a network with two or more component is Inf!.
+
+```{r}
+giant <- decompose(g, mode="strong")[[1]]
+giant
+```
+
+Components can be __weakly connected__ (in undirected networks) or __strongly connected__ (in directed networks, where there is an edge that ends in every single node of that component).
+
+```{r}
+weakly <- decompose(g, mode="weak")[[1]]
+weakly
+```
+
+And now we keep only the giant component:
+```{r}
+g <- decompose(g, mode="strong")[[1]]
+nodes <- nodes[nodes$Label %in% V(g)$Label,]
+```
+
+Even within a giant component, there can be different subsets of the network that are more connected to each other than to the rest of the network. The goal of __community detection algorithms__ is to identify these subsets.
+
+There are a few different algorithms, each following a different logic. 
+
+The __walktrap__ algorithm finds communities through a series of short random walks. The idea is that these random walks tend to stay within the same community. The length of these random walks is 4 edges by default, but you may want to experiment with different values (longer random walks will lead to fewer communities). The goal of this algorithm is to identify the partition that maximizes a modularity score.
+
+```{r}
+cluster_walktrap(g) # default is 4 steps
+cluster_walktrap(g, steps=2)
+cluster_walktrap(g, steps=5)
+cluster_walktrap(g, steps=10)
+```
+
+Other methods are:
+
+- The __infomap__ method attempts to map the flow of information in a network, and the different clusters in which information may get remain for longer periods. Similar to walktrap, but not necessarily maximizing modularity, but rather the so-called "map equation".
+- The __edge-betweenness__ method iteratively removes edges with high betweenness, with the idea that they are likely to connect different parts of the network. Here betweenness (gatekeeping potential) applies to edges, but the intuition is the same.
+- The __label propagation__ method labels each node with unique labels, and then updates these labels by choosing the label assigned to the majority of their neighbors, and repeat this iteratively until each node has the most common labels among its neighbors.
+- The __Louvain algorithm__ initially assigns each node to its own community; nodes are then sequentially assigned to the community that increases modularity (if any) so that communities are merged; this merging process continues until modularity cannot increase or only one community remains.
+
+```{r, eval=FALSE}
+cluster_infomap(g)
+cluster_edge_betweenness(g)
+cluster_label_prop(g)
+cluster_louvain(g)
+```
+
+The choice of one or other algorithm may depend on substantive or practical reasons, as always. For now, let's pick the Louvain algorithm, which identifies three clusters.
+
+```{r}
+comm <- cluster_louvain(g)
+nodes$cluster <- membership(comm)
+```
+
+Who's in each cluster?
+
+```{r}
+head(nodes$Label[nodes$cluster==1], n=10)
+head(nodes$Label[nodes$cluster==2], n=10)
+head(nodes$Label[nodes$cluster==3], n=10)
+```
+
+An even better way to understand the content of each cluster is to combine what we've learnt about text analysis so far. Let's see what that reveals:
+
+```{r}
+library(quanteda)
+library(quanteda.textstats)
+
+# most frequent features
+for (i in 1:3){
+  message("Cluster ", i)
+  dfm <- dfm(tokens(nodes$description[nodes$cluster==i],
+             remove_punct=TRUE)) %>% 
+    dfm_remove(stopwords("english"))
+  print(topfeatures(dfm, n=25))
+}
+
+# most distinctive features
+poir <- dfm(tokens(corpus(nodes[,c("description", "cluster")], text_field="description")))
+for (i in 1:3){
+    print(
+      head(textstat_keyness(poir, target=docvars(poir)$cluster==i,
+                      measure="lr"), n=20)
+    )
+}
+
+# location
+poir <- dfm(tokens(corpus(nodes[,c("location", "cluster")], text_field="location")))
+for (i in 1:3){
+    print(
+      head(textstat_keyness(poir, target=docvars(poir)$cluster==i,
+                      measure="lr"), n=20)
+    )
+}
+
+```
+
+The final way in which we can think about network communities is in terms of hierarchy or structure. We'll discuss one of these methods.
+
+__K-core decomposition__ allows us to identify the core and the periphery of the network. A k-core is a maximal subnet of a network such that all nodes have at least degree K.
+
+```{r}
+str(coreness(g))
+head(which(coreness(g)==32), n=10) # what is the core of the network?
+head(which(coreness(g)==1), n=10) # what is the periphery of the network?
+
+# looking at what predicts being in the core
+nodes$k <- coreness(g)
+# number of followers?
+plot(nodes$k, log(nodes$followers_count))
+cor(nodes$k, log(nodes$followers_count))
+# text?
+poir <- dfm(tokens(corpus(nodes[,c("description", "k")], text_field="description")))
+head(textstat_keyness(poir, target=docvars(poir)$k>=30,
+                      measure="lr"), n=20)
+head(textstat_keyness(poir, target=docvars(poir)$k<30,
+                      measure="lr"), n=20)
+
+```
+
+If you want to learn more about this technique, see our [paper in PLOS ONE](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0143611) where we use it to study large-scale Twitter networks in the context of protest events.
+
+
+In case you're curious, here's the code I used to collect the data:
+
+```{r, eval=FALSE}
+library(tweetscores)
+options(stringsAsFactors=F)
+oauth_folder = "~/Dropbox/credentials/twitter/"
+
+accounts <- getFriends("uscpoir", oauth=oauth_folder)
+
+# creating folders (if they do not exists)
+try(dir.create("../data/friends"))
+
+# first check if there's any list of friends already downloaded to 'outfolder'
+accounts.done <- gsub(".rdata", "", list.files("../data/friends"))
+accounts.left <- accounts[accounts %in% accounts.done == FALSE]
+accounts.left <- accounts.left[!is.na(accounts.left)]
+
+# loop over the rest of accounts, downloading friend lists from API
+while (length(accounts.left) > 0){
+
+    # sample randomly one account to get friends
+    new.user <- sample(accounts.left, 1)
+    #new.user <- accounts.left[1]
+    cat(new.user, "---", length(accounts.left), " accounts left!\n")    
+    
+    # download followers (with some exception handling...) 
+    error <- tryCatch(friends <- getFriends(user_id=new.user,
+        oauth=oauth_folder, sleep=0.5, verbose=FALSE), error=function(e) e)
+    if (inherits(error, 'error')) {
+        cat("Error! On to the next one...")
+        accounts.left <- accounts.left[-which(accounts.left %in% new.user)]
+        next
+    }
+    
+    # save to file and remove from lists of "accounts.left"
+    file.name <- paste0("../data/friends/", new.user, ".rdata")
+    save(friends, file=file.name)
+    accounts.left <- accounts.left[-which(accounts.left %in% new.user)]
+
+}
+
+# keeping only those that we were able to download
+accounts <- gsub(".rdata", "", list.files("../data/friends"))
+
+# reading and creating network
+edges <- list()
+for (i in 1:length(accounts)){
+	file.name <- paste0("../data/friends/", accounts[i], ".rdata")
+	load(file.name)
+	if (length(friends)==0){ next }
+	chosen <- accounts[accounts %in% friends]
+	if (length(chosen)==0){ next }
+	edges[[i]] <- data.frame(
+		source = accounts[i], target = chosen)
+}
+
+edges <- do.call(rbind, edges)
+nodes <- data.frame(id_str=unique(c(edges$source, edges$target)))
+
+# adding user data
+users <- getUsersBatch(ids=nodes$id_str, oauth=oauth_folder)
+nodes <- merge(nodes, users)
+
+library(igraph)
+g <- graph_from_data_frame(d=edges, vertices=nodes, directed=TRUE)
+g
+
+names(nodes)[1:2] <- c("Id", "Label")
+names(edges)[1:2] <- c("Source", "Target")
+write.csv(nodes, file="../data/poir-nodes.csv", row.names=FALSE)
+write.csv(edges, file="../datapoir-edges.csv", row.names=FALSE)
+```

@@ -201,13 +201,11 @@ The following list provides links to the code used in the guided coding sessions
 <div id="collapse10" class="panel-collapse collapse in" style="margin:12px">
 
 
-- Code: Introduction to social network analysis with igraph
+- Code: [Introduction to social network analysis with igraph](code/17-networks-intro.html) ([.Rmd file](code/17-networks-intro.Rmd))
 
-- Code: Community detection
+- Code: [Community detection](code/18-community-detection.html) ([.Rmd file](code/18-community-detection.Rmd))
 
-- Tutorial: Network visualization with Gephi
-
-- GitHub Classroom: Challenge 9
+- [GitHub Classroom: Challenge 9](https://classroom.github.com/a/M0-bCL-X)
 
 </div>
 </div>
@@ -228,7 +226,9 @@ The following list provides links to the code used in the guided coding sessions
 
 - Code: Collecting Twitter data from the REST API
 
-- Code: Collecting Facebook and Instagram data from CrowdTangle
+- Demo: Collecting Facebook and Instagram data from CrowdTangle
+
+- Tutorial: Network visualization with Gephi
 
 - GitHub Classroom: Challenge 10
 

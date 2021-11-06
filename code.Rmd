@@ -246,12 +246,9 @@ The following list provides links to the code used in the guided coding sessions
 </div>
 <div id="collapse12" class="panel-collapse collapse in" style="margin:12px">
 
-- Code: Principal component analysis
+- Code: [Principal component analysis](code/21-PCA.html) ([.Rmd file](code/21-PCA.Rmd))
 
-- Code: Latent space network models
-
-- GitHub Classroom: Challenge 11
-
+- Code: [Latent space network models](code/22-latent-space.html) ([.Rmd file](code/22-latent-space.Rmd))
 
 </div>
 </div>
@@ -277,8 +274,6 @@ The following list provides links to the code used in the guided coding sessions
 - Code: Querying multiple tables. Grouping and aggregating operations.
 
 - Code: Parsing text in PDF files
-
-- GitHub Classroom: Challenge 12
 
 
 </div>

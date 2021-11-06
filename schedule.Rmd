@@ -399,6 +399,6 @@ No class: Thanksgiving Holiday.
 </div>
 <div id="collapse15" class="panel-collapse collapse in" style="margin:12px">
 
-Small-group discussions of research projects. Course recap. Industry careers panel.
+Small-group discussions of research projects. Course recap. Job market and industry careers advice.
 
 </div></div></div>

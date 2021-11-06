@@ -340,7 +340,7 @@ Note: slides will be added as the course progresses.
 
 **Topics:** Dimensionality reduction. Latent space network models.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/16-latent-variables.pdf)
 
 #### Readings for discussion
 

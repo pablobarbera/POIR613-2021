@@ -259,7 +259,31 @@ The following list provides links to the code used in the guided coding sessions
 <div class="panel panel-default">
 <div class="panel-heading">
 <h2 id="week-12" class="panel-title">
-<a data-toggle="collapse" href="#collapse12">Week 13: 11/17. Big Data.</a>
+<a data-toggle="collapse" href="#collapse12">Week 13: 11/17. Big Data (I).</a>
+</h2>
+</div>
+<div id="collapse12" class="panel-collapse collapse in" style="margin:12px">
+
+
+- Slides: [Introduction to SQL](slides/17-SQL.pdf)
+
+- Code: [Basics of SQL queries](code/S01-sql-intro.html)
+
+- Code: [Querying multiple tables. Grouping and aggregating operations.](code/S02-sql-joins.html)
+
+- Code: [Querying large-scale databases.](code/S03-large-queries.html)
+
+- GitHub Classroom: [Additional materials and challenges](https://classroom.github.com/a/R6oxPiJC)
+
+</div>
+</div>
+</div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="week-12" class="panel-title">
+<a data-toggle="collapse" href="#collapse12">Week 15: 12/01. Big Data (II).</a>
 </h2>
 </div>
 <div id="collapse12" class="panel-collapse collapse in" style="margin:12px">
@@ -269,12 +293,7 @@ The following list provides links to the code used in the guided coding sessions
 
 - Code: Parallel computing with R
 
-- Code: Basics of SQL queries
-
-- Code: Querying multiple tables. Grouping and aggregating operations.
-
 - Code: Parsing text in PDF files
-
 
 </div>
 </div>

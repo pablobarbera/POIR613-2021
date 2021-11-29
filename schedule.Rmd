@@ -13,7 +13,7 @@ Note: slides will be added as the course progresses.
 </div>
 <div id="collapse1" class="panel-collapse collapse in" style="margin:12px">
 
-**Topics:** Introductions and course overview. What is Computational Social Science? Good computing practices. Introduction to version control and GitHub.
+**Topics:** Introductions and course overview. What is Computational Social Science? Introduction to version control and GitHub.
 
 [LINK TO SLIDES (.pdf)](slides/01-intro.pdf)
 
@@ -363,7 +363,7 @@ Note: slides will be added as the course progresses.
 
 **Topics:** Parallel programming with R. Introduction to SQL.
 
-LINK TO SLIDES (.pdf)
+[LINK TO SLIDES (.pdf)](slides/17-SQL.pdf)
 
 #### Background reading
 
@@ -399,6 +399,10 @@ No class: Thanksgiving Holiday.
 </div>
 <div id="collapse15" class="panel-collapse collapse in" style="margin:12px">
 
-Small-group discussions of research projects. Course recap. Job market and industry careers advice.
+**Topics:** Parallel programming with R. Good coding practices
+
+[LINK TO SLIDES (.pdf)](slides/19-good-coding-revisited.pdf)
+
+[Job market and industry careers advice.](https://docs.google.com/presentation/d/1qf_4lhe8xIfDlDaTte5T-ir9pSNTirzR13_xTHVjdFg/edit?usp=sharing)
 
 </div></div></div>

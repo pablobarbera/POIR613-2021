@@ -289,11 +289,11 @@ The following list provides links to the code used in the guided coding sessions
 <div id="collapse12" class="panel-collapse collapse in" style="margin:12px">
 
 
-- Slides: Parallel computing
+- Slides: [Parallel computing](slides/18-parallel.pdf)
 
-- Code: Parallel computing with R
+- Code: [Parallel computing with R](code/23-parallel-computing.html) ([.Rmd file](code/23-parallel-computing.Rmd))
 
-- Code: Parsing text in PDF files
+- Code: [Parsing text in PDF files](code/24-data-in-PDFs.html) ([.Rmd file](code/24-data-in-PDFs.Rmd))
 
 </div>
 </div>
